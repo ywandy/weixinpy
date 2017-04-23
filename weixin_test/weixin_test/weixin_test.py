@@ -52,23 +52,23 @@ class WeixinInterface:
         回复文本消息
         :param fromUser:
         :param toUser:
-        :param msg:要发送到的消息，文本格式
+        :param msg:what you sent
         :return:
         '''
         return self.render.reply_text(toUser, fromUser, int(time.time()),msg + '\n\ntime: ' + now_time)#加入时间戳
 
     def _recv_text(self, fromUser, toUser, xml):
         '''
-        接收到文本消息，自动回复
+       auto reply
         :param fromUser:
         :param toUser:
-        :param xml:收到的xml文件
+        :param xml:rec xml
         :return:
         '''
         #提取xml中Content文本信息
         content = xml.find('Content').text
         reply_msg = content
-        return self._reply_text(fromUser, toUser, u'你刚才说的是：' + reply_msg )
+        return self._reply_text(fromUser, toUser, u'you said：' + reply_msg )
 
     def GET(self): #get,从指定的资源请求数据
         #获取输入参数
