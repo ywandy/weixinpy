@@ -42,13 +42,13 @@ class WeixinInterface:
         msgType=xml.find("MsgType").text
         fromUser=xml.find("FromUserName").text
         toUser=xml.find("ToUserName").text
-        if '温度' in content:
+        if u'温度' in content:
              return self.render.reply_text(fromUser,toUser,int(time.time()),u"当前 平台 NULL 的温度是:"+"99") 
-        elif '气压' in content:
+        elif u'气压' in content:
              return self.render.reply_text(fromUser,toUser,int(time.time()),u"t当前 平台 NULL 的气压是:"+"103k pa") 
-        elif '平台' in content:
+        elif u'平台' in content:
              return self.render.reply_text(fromUser,toUser,int(time.time()),u"t当前 选中的平台是 NULL") 
-        elif 'green' in content:
+        elif u'green' in content:
              return self.render.reply_text(fromUser,toUser,int(time.time()),u"当然是选择原谅她啦！") 
         return self.render.reply_text(fromUser,toUser,int(time.time()),u"what you sent:"+content) 
         
