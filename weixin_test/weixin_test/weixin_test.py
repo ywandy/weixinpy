@@ -68,7 +68,7 @@ class WeixinInterface:
         #提取xml中Content文本信息
         content = xml.find('Content').text
         reply_msg = content
-        return self._reply_text(fromUser, toUser, u'you said：' + reply_msg )
+        return self._reply_text(fromUser, toUser, u'you said:' + reply_msg )
 
     def GET(self): #get,从指定的资源请求数据
         #获取输入参数
