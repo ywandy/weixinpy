@@ -46,7 +46,11 @@ class WeixinInterface:
         msgType=xml.find("MsgType").text
         fromUser=xml.find("FromUserName").text
         toUser=xml.find("ToUserName").text
-        return self.render.reply_text(fromUser,toUser,int(time.time()),u"rec:"+content) 
+        if 'temp' in content:
+             return self.render.reply_text(fromUser,toUser,int(time.time()),u"the tempture is:"+"99") 
+        elif 'baro' in content:
+             return self.render.reply_text(fromUser,toUser,int(time.time()),u"the baro is:"+"103k pa") 
+        return self.render.reply_text(fromUser,toUser,int(time.time()),u"what you sent:"+content) 
         
 
 app = web.application(urls, globals())
