@@ -49,6 +49,7 @@ class WeixinInterface:
         return self.render.reply_text(fromUser,toUser,int(time.time()),u"rec:"+content) 
         
 
-application = web.application(urls, globals())
+app = web.application(urls, globals())
+application = app.wsgifunc()
 if __name__ == "__main__":
     application.run()
