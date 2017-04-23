@@ -50,6 +50,8 @@ class WeixinInterface:
              return self.render.reply_text(fromUser,toUser,int(time.time()),u"the tempture is:"+"99") 
         elif 'baro' in content:
              return self.render.reply_text(fromUser,toUser,int(time.time()),u"the baro is:"+"103k pa") 
+         elif 'green' in content:
+             return self.render.reply_text(fromUser,toUser,int(time.time()),u"当然是选择原谅她啦！") 
         return self.render.reply_text(fromUser,toUser,int(time.time()),u"what you sent:"+content) 
         
 
