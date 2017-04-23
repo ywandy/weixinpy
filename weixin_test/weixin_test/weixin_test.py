@@ -7,7 +7,7 @@ from lxml import etree
  
  
 urls = (
-'/weixin','WeixinInterface'
+'~/weixin','WeixinInterface'
 )
  
 
