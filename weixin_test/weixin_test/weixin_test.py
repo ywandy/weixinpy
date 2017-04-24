@@ -5,7 +5,7 @@ import time
 import hashlib
 from lxml import etree
 import logging
-
+import urllib2
 API_YEELINK = '74c4601f0870e71ed6db8ec6f4741b33'
 URL_RPI_SERSOR = 'http://api.yeelink.net/v1.0/device/350381/sensor/393171/datapoints'
 
