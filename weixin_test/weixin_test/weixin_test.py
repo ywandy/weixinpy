@@ -39,11 +39,11 @@ class WeixinInterface:
     def POST(self):        
         str_xml = web.data() 
         xml = etree.fromstring(str_xml)
-        content=xml.find("Content").text
         msgType=xml.find("MsgType").text
         fromUser=xml.find("FromUserName").text
         toUser=xml.find("ToUserName").text
-        logging.warning(msgType)     
+        logging.warning(msgType)  
+        content=xml.find("Content").text   
         if u'温度' in content:
              return self.render.reply_text(fromUser,toUser,int(time.time()),u"当前 平台 NULL 的温度是:"+"99") 
         elif u'气压' in content:
