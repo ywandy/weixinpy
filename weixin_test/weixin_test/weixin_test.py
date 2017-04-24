@@ -6,6 +6,9 @@ import hashlib
 from lxml import etree
 import logging
 
+API_YEELINK = '74c4601f0870e71ed6db8ec6f4741b33'
+URL_RPI_SERSOR = 'http://api.yeelink.net/v1.0/device/350381/sensor/393171/datapoints'
+
 urls = (
 '/weixin','WeixinInterface'
 )
@@ -23,6 +26,45 @@ def _check_hash(data):
     if hashcode == signature:
         return True
     return False
+
+def get_sensor_data_acc(year,month,day,hour,minute,sec,url): #获取普通数值型传感器历史数据
+    time_stamp = datetime.datetime(year,month,day,hour,minute,sec).isoformat()
+    post_head = {"U-ApiKey": API_YEELINK}
+    req = urllib2.Request(str(url+time_stamp+"/"),headers =post_head)
+    try : response = urllib2.urlopen(req)
+    except HTTPError as e:
+        print "HTTP 连接出错，检查请求内容"
+        print e.reason
+        print e.code
+    except URLError as e:
+        print "报错内容:",
+        print e.reason
+        print "请求的网页错误，请检查网络连接"
+        return 1
+    except e:
+        print "存在异常，函数退出"
+        return 1
+    js = json.loads(response.read())
+    print js[0]['value']
+
+def get_sensor_data(url): #获取普通数值型传感器历史数据
+    post_head = {"U-ApiKey": API_YEELINK}
+    req = urllib2.Request(str(url+"/"),headers =post_head)
+    try : response = urllib2.urlopen(req)
+    except HTTPError as e:
+        print "HTTP 连接出错，检查请求内容"
+        print e.reason
+        print e.code
+    except URLError as e:
+        print "报错内容:",
+        print e.reason
+        print "请求的网页错误，请检查网络连接"
+        return 1
+    except e:
+        print "存在异常，函数退出"
+        return 1
+    js = json.loads(response.read())
+    print js[0]['value']
 
 class WeixinInterface:
  
@@ -43,7 +85,10 @@ class WeixinInterface:
         fromUser=xml.find("FromUserName").text
         toUser=xml.find("ToUserName").text
         logging.warning(msgType)  
-        content=xml.find("Content").text   
+        if(msgType=='text'):
+            content=xml.find("Content").text   #判断为文字才做文字处理
+        if u'树莓派温度' in content:
+            return self.render.reply_text(fromUser,toUser,int(time.time()),u"当前树莓派的温度是:"+get_sensor_data(URL_RPI_SERSOR)) 
         if u'温度' in content:
              return self.render.reply_text(fromUser,toUser,int(time.time()),u"当前 平台 NULL 的温度是:"+"99") 
         elif u'气压' in content:
