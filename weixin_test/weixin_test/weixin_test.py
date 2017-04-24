@@ -48,7 +48,7 @@ def get_sensor_data_acc(year,month,day,hour,minute,sec,url): #获取普通数值
         print "存在异常，函数退出"
         return 1
     js = json.loads(response.read())
-    print js[0]['value']
+    return str(js[0]['value'])
 
 def get_sensor_data(url): #获取普通数值型传感器历史数据
     post_head = {"U-ApiKey": API_YEELINK}
@@ -67,7 +67,7 @@ def get_sensor_data(url): #获取普通数值型传感器历史数据
         print "存在异常，函数退出"
         return 1
     js = json.loads(response.read())
-    print js[0]['value']
+    return str(js[0]['value'])
 
 class WeixinInterface:
  
