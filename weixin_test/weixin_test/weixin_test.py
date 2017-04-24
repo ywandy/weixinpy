@@ -43,7 +43,7 @@ class WeixinInterface:
         msgType=xml.find("MsgType").text
         fromUser=xml.find("FromUserName").text
         toUser=xml.find("ToUserName").text
-        logging.debug(msgType)     
+        logging.warning(msgType)     
         if u'温度' in content:
              return self.render.reply_text(fromUser,toUser,int(time.time()),u"当前 平台 NULL 的温度是:"+"99") 
         elif u'气压' in content:
