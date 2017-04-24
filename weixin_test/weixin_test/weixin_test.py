@@ -50,7 +50,7 @@ class WeixinInterface:
              return self.render.reply_text(fromUser,toUser,int(time.time()),u"当前 选中的平台是 NULL") 
         elif u'green' in content:
              return self.render.reply_text(fromUser,toUser,int(time.time()),u"当然是选择原谅她啦！") 
-        return self.render.reply_text(fromUser,toUser,int(time.time()),u"你刚才发送到公众号的信息是:"+content+"  信息类型是"+msgType) 
+        return self.render.reply_text(fromUser,toUser,int(time.time()),u"你刚才发送到公众号的信息是:"+content+u"  信息类型是"+msgType) 
         
 
 app = web.application(urls, globals())
