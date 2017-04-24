@@ -4,7 +4,8 @@ import web
 import time
 import hashlib
 from lxml import etree
- 
+import logging
+
 urls = (
 '/weixin','WeixinInterface'
 )
@@ -42,6 +43,7 @@ class WeixinInterface:
         msgType=xml.find("MsgType").text
         fromUser=xml.find("FromUserName").text
         toUser=xml.find("ToUserName").text
+        logging.debug(msgType)     
         if u'温度' in content:
              return self.render.reply_text(fromUser,toUser,int(time.time()),u"当前 平台 NULL 的温度是:"+"99") 
         elif u'气压' in content:
@@ -50,7 +52,7 @@ class WeixinInterface:
              return self.render.reply_text(fromUser,toUser,int(time.time()),u"当前 选中的平台是 NULL") 
         elif u'green' in content:
              return self.render.reply_text(fromUser,toUser,int(time.time()),u"当然是选择原谅她啦！") 
-        return self.render.reply_text(fromUser,toUser,int(time.time()),u"你刚才发送到公众号的信息是:"+content+str(msgType)) 
+        return self.render.reply_text(fromUser,toUser,int(time.time()),u"你刚才发送到公众号的信息是:"+content) 
         
 
 app = web.application(urls, globals())
