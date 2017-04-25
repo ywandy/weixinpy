@@ -11,7 +11,7 @@ import json
 from urllib2 import HTTPError, URLError
 API_YEELINK = '74c4601f0870e71ed6db8ec6f4741b33'
 URL_RPI_SERSOR = 'http://api.yeelink.net/v1.0/device/350381/sensor/393171/datapoints'
-
+URL_WEATHER_SENSOR = 'http://api.yeelink.net/v1.0/device/357151/sensor/405136/datapoints'
 urls = (
 '/weixin','WeixinInterface'
 )
@@ -99,13 +99,13 @@ class WeixinInterface:
             if u'树莓派温度' in content:
                 return self.render.reply_text(fromUser,toUser,int(time.time()),u"当前树莓派的温度是:"+get_sensor_data(URL_RPI_SERSOR)) 
             if u'温度' in content:
-                 return self.render.reply_text(fromUser,toUser,int(time.time()),u"当前 平台 NULL 的温度是:"+"99") 
+                return self.render.reply_text(fromUser,toUser,int(time.time()),u"当前 平台 气象站 的温度是:"+get_sensor_data(URL_WEATHER_SENSOR)) 
             elif u'气压' in content:
-                 return self.render.reply_text(fromUser,toUser,int(time.time()),u"t当前 平台 NULL 的气压是:"+"103k pa") 
+                return self.render.reply_text(fromUser,toUser,int(time.time()),u"t当前 平台 NULL 的气压是:"+"103k pa") 
             elif u'平台' in content:
-                 return self.render.reply_text(fromUser,toUser,int(time.time()),u"当前 选中的平台是 NULL") 
+                return self.render.reply_text(fromUser,toUser,int(time.time()),u"当前 选中的平台是 NULL") 
             elif u'green' in content:
-                 return self.render.reply_text(fromUser,toUser,int(time.time()),u"当然是选择原谅她啦！") 
+                return self.render.reply_text(fromUser,toUser,int(time.time()),u"当然是选择原谅她啦！") 
             return self.render.reply_text(fromUser,toUser,int(time.time()),u"你刚才发送到公众号的信息是:"+content) 
         
 
