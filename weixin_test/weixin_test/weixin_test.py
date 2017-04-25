@@ -69,7 +69,9 @@ def get_sensor_data(url): #获取普通数值型传感器历史数据
         return 1
     js = json.loads(response.read())
     logging.warning(js)
-    return str(js['value'])
+    str = js['value'] + u"   (数据更新时间)" + js['timestamp']
+    #return str(js['value'])
+    return str
 
 class WeixinInterface:
  
