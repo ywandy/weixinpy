@@ -102,7 +102,7 @@ class WeixinInterface:
             if u'树莓派温度' in content:
                 return self.render.reply_text(fromUser,toUser,int(time.time()),u"当前树莓派的温度是:"+get_sensor_data(URL_RPI_SERSOR)) 
             if u'温度' in content:
-                return self.render.reply_text(fromUser,toUser,int(time.time()),u"当前 平台 气象站 的温度是:"+get_sensor_data(URL_WEATHER_SENSOR)'C') 
+                return self.render.reply_text(fromUser,toUser,int(time.time()),u"当前 平台 气象站 的温度是:"+get_sensor_data(URL_WEATHER_SENSOR)+'C') 
             elif u'气压' in content:
                 return self.render.reply_text(fromUser,toUser,int(time.time()),u"当前 平台 气象站 的气压是:"+get_sensor_data(URL_BAR_SENSOR)+'pa') 
             elif u'平台' in content:
