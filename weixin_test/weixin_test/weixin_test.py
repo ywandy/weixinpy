@@ -80,17 +80,6 @@ def get_sensor_data(url): #获取普通数值型传感器历史数据
     #return str(js['value'])
     return str(js['value']) + u"   (数据更新时间)" + str(js['timestamp'])
 
-def data_get_all():
-    temp = get_sensor_data(URL_WEATHER_SENSOR)
-    hum = get_sensor_data(URL_HUM_SENSOR)
-    bar = get_sensor_data(URL_BAR_SENSOR)
-    light = get_sensor_data(URL_LIGHT_SENSOR)
-    co = get_sensor_data(URL_CO_SENSOR)
-    rain = get_sensor_data(URL_RAIN_SENSOR)
-    formal = get_sensor_data(URL_FORMAL_SENSOR)
-    air = get_sensor_data(URL_AIR_SENSOR)
-    return temp,hum,bar,light,co,rain,formal,air
-
 class WeixinInterface:
  
     def __init__(self):
@@ -115,7 +104,14 @@ class WeixinInterface:
             logging.warning(u"媒体ID"+MediaID)
             return self.render.reply_text(fromUser,toUser,int(time.time()),u"返回媒体ID:"+MediaID) 
         elif(msgType=='text'):
-            temp,hum,bar,light,co,rain,formal,air = data_get_all()
+            temp = get_sensor_data(URL_WEATHER_SENSOR)
+            hum = get_sensor_data(URL_HUM_SENSOR)
+            bar = get_sensor_data(URL_BAR_SENSOR)
+            light = get_sensor_data(URL_LIGHT_SENSOR)
+            co = get_sensor_data(URL_CO_SENSOR)
+            rain = get_sensor_data(URL_RAIN_SENSOR)
+            formal = get_sensor_data(URL_FORMAL_SENSOR)
+            air = get_sensor_data(URL_AIR_SENSOR)
             content=xml.find("Content").text   #判断为文字才做文字处理
             if u'树莓派温度' in content:
                 return self.render.reply_text(fromUser,toUser,int(time.time()),u"当前树莓派的温度是:"+get_sensor_data(URL_RPI_SERSOR)) 
