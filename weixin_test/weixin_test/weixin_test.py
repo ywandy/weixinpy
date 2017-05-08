@@ -139,7 +139,7 @@ class WeixinInterface:
                         +u"一氧化碳含量:"+co+" PPM\n" \
                         +u"雨水传感器原始数据:"+rain+" AD\n" \
                         +u"灰尘含量:"+formal+" PPM\n" \
-                        +u"空气质量指数:"+air+" Level\n" \
+                        +u"空气质量指数:"+air+" Level\n"
                 return self.render.reply_text(fromUser,toUser,int(time.time()),str)
             elif u'green' in content:
                 return self.render.reply_text(fromUser,toUser,int(time.time()),u"当然是选择原谅她啦！") 
