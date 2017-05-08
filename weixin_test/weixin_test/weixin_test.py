@@ -128,7 +128,8 @@ class WeixinInterface:
                         +u"温度:"+temp+" C\n" \
                         +u"湿度:"+hum+" %\n" \
                         +u"气压:"+bar+" Pa\n" \
-                        +u"光强:"+light+" LUX\n"
+                        +u"光强:"+light+" LUX\n\n\n" \
+                        +u"更详细的数据以及数据图表请登录查看:\n http://www.yeelink.net/user/devices/357151"
                 return self.render.reply_text(fromUser,toUser,int(time.time()),str)
             elif u'数据2' in content:
                 co = get_sensor_data(URL_CO_SENSOR)
@@ -139,7 +140,8 @@ class WeixinInterface:
                         +u"一氧化碳含量:"+co+" PPM\n" \
                         +u"雨水传感器原始数据:"+rain+" AD\n" \
                         +u"灰尘含量:"+formal+" PPM\n" \
-                        +u"空气质量指数:"+air+" Level\n"
+                        +u"空气质量指数:"+air+" Level\n\n\n" \
+                        +u"更详细的数据以及数据图表请登录查看:\n http://www.yeelink.net/user/devices/357151"
                 return self.render.reply_text(fromUser,toUser,int(time.time()),str)
             elif u'green' in content:
                 return self.render.reply_text(fromUser,toUser,int(time.time()),u"当然是选择原谅她啦！") 
