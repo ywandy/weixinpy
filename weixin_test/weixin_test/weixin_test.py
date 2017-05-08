@@ -78,7 +78,7 @@ def get_sensor_data(url): #获取普通数值型传感器历史数据
     logging.warning(js)
     #str = js['value'] + u"   (数据更新时间)" + js['timestamp']
     #return str(js['value'])
-    return str(js['value']) + u"   (数据更新时间)" + str(js['timestamp'])
+    return str(js['value'])
 
 class WeixinInterface:
  
@@ -125,7 +125,10 @@ class WeixinInterface:
                 bar = get_sensor_data(URL_BAR_SENSOR)
                 light = get_sensor_data(URL_LIGHT_SENSOR)
                 str = u"当前的气象站数据是:\n" \
-                        +u"温度:"+temp+"'C"
+                        +u"温度:"+temp+"'C\n" \
+                        +u"湿度:"+temp+" %\n" \
+                        +u"气压:"+temp+" Pa\n" \
+                        +u"光强:"+temp+" LUX\n"
                 return self.render.reply_text(fromUser,toUser,int(time.time()),str)
             elif u'数据2' in content:
                 co = get_sensor_data(URL_CO_SENSOR)
@@ -133,7 +136,10 @@ class WeixinInterface:
                 formal = get_sensor_data(URL_FORMAL_SENSOR)
                 air = get_sensor_data(URL_AIR_SENSOR)
                 str = u"当前的气象站数据是:\n" \
-                        +u"温度:"+temp+"'C"
+                        +u"一氧化碳含量:"+co+" PPM\n" \
+                        +u"雨水传感器原始数据:"+rain+" AD\n" \
+                        +u"灰尘含量:"+formal+" PPM\n" \
+                        +u"空气质量指数:"+air+" Level\n" \
                 return self.render.reply_text(fromUser,toUser,int(time.time()),str)
             elif u'green' in content:
                 return self.render.reply_text(fromUser,toUser,int(time.time()),u"当然是选择原谅她啦！") 
