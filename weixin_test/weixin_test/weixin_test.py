@@ -124,18 +124,18 @@ class WeixinInterface:
                 hum = get_sensor_data(URL_HUM_SENSOR)
                 bar = get_sensor_data(URL_BAR_SENSOR)
                 light = get_sensor_data(URL_LIGHT_SENSOR)
-                str = u"当前的气象站数据是:\n" \
-                        +u"温度:"+temp+"'C\n" \
-                        +u"湿度:"+temp+" %\n" \
-                        +u"气压:"+temp+" Pa\n" \
-                        +u"光强:"+temp+" LUX\n"
+                str = u"当前的 气象站 主要传感器数据是:\n" \
+                        +u"温度:"+temp+" C\n" \
+                        +u"湿度:"+hum+" %\n" \
+                        +u"气压:"+bar+" Pa\n" \
+                        +u"光强:"+light+" LUX\n"
                 return self.render.reply_text(fromUser,toUser,int(time.time()),str)
             elif u'数据2' in content:
                 co = get_sensor_data(URL_CO_SENSOR)
                 rain = get_sensor_data(URL_RAIN_SENSOR)
                 formal = get_sensor_data(URL_FORMAL_SENSOR)
                 air = get_sensor_data(URL_AIR_SENSOR)
-                str = u"当前的气象站数据是:\n" \
+                str = u"当前的 气象站 附加传感器数据是:\n" \
                         +u"一氧化碳含量:"+co+" PPM\n" \
                         +u"雨水传感器原始数据:"+rain+" AD\n" \
                         +u"灰尘含量:"+formal+" PPM\n" \
