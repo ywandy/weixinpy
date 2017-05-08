@@ -104,14 +104,8 @@ class WeixinInterface:
             logging.warning(u"媒体ID"+MediaID)
             return self.render.reply_text(fromUser,toUser,int(time.time()),u"返回媒体ID:"+MediaID) 
         elif(msgType=='text'):
-            temp = get_sensor_data(URL_WEATHER_SENSOR)
-            hum = get_sensor_data(URL_HUM_SENSOR)
-            bar = get_sensor_data(URL_BAR_SENSOR)
-            light = get_sensor_data(URL_LIGHT_SENSOR)
-            co = get_sensor_data(URL_CO_SENSOR)
-            rain = get_sensor_data(URL_RAIN_SENSOR)
-            formal = get_sensor_data(URL_FORMAL_SENSOR)
-            air = get_sensor_data(URL_AIR_SENSOR)
+           
+           
             content=xml.find("Content").text   #判断为文字才做文字处理
             if u'树莓派温度' in content:
                 return self.render.reply_text(fromUser,toUser,int(time.time()),u"当前树莓派的温度是:"+get_sensor_data(URL_RPI_SERSOR)) 
@@ -125,7 +119,19 @@ class WeixinInterface:
                 return self.render.reply_text(fromUser,toUser,int(time.time()),u"当前 平台 气象站 的一氧化碳含量是:"+get_sensor_data(URL_CO_SENSOR) + u'单位 PPM')
             elif u'平台' in content:
                 return self.render.reply_text(fromUser,toUser,int(time.time()),u"当前 选中的平台是 气象站")
-            elif u'数据' in content:
+            elif u'数据1' in content:
+                temp = get_sensor_data(URL_WEATHER_SENSOR)
+                hum = get_sensor_data(URL_HUM_SENSOR)
+                bar = get_sensor_data(URL_BAR_SENSOR)
+                light = get_sensor_data(URL_LIGHT_SENSOR)
+                str = u"当前的气象站数据是:\n" \
+                        +u"温度:"+temp+"'C"
+                return self.render.reply_text(fromUser,toUser,int(time.time()),str)
+            elif u'数据2' in content:
+                co = get_sensor_data(URL_CO_SENSOR)
+                rain = get_sensor_data(URL_RAIN_SENSOR)
+                formal = get_sensor_data(URL_FORMAL_SENSOR)
+                air = get_sensor_data(URL_AIR_SENSOR)
                 str = u"当前的气象站数据是:\n" \
                         +u"温度:"+temp+"'C"
                 return self.render.reply_text(fromUser,toUser,int(time.time()),str)
