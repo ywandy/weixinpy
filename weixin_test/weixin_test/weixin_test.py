@@ -12,9 +12,13 @@ from urllib2 import HTTPError, URLError
 API_YEELINK = '74c4601f0870e71ed6db8ec6f4741b33'
 URL_RPI_SERSOR = 'http://api.yeelink.net/v1.0/device/350381/sensor/393171/datapoints'
 URL_WEATHER_SENSOR = 'http://api.yeelink.net/v1.0/device/357151/sensor/405136/datapoints'
+URL_HUM_SENSOR = 'http://api.yeelink.net/v1.0/device/357151/sensor/405137/datapoints'
 URL_BAR_SENSOR = 'http://api.yeelink.net/v1.0/device/357151/sensor/405139/datapoints'
 URL_LIGHT_SENSOR = 'http://api.yeelink.net/v1.0/device/357151/sensor/406121/datapoints'
 URL_CO_SENSOR = 'http://api.yeelink.net/v1.0/device/357151/sensor/405958/datapoints'
+URL_RAIN_SENSOR = 'http://api.yeelink.net/v1.0/device/357151/sensor/406169/datapoints'
+URL_FORMAL_SENSOR = 'http://api.yeelink.net/v1.0/device/357151/sensor/406170/datapoints'
+URL_AIR_SENSOR = 'http://api.yeelink.net/v1.0/device/357151/sensor/406168/datapoints'
 urls = (
 '/weixin','WeixinInterface'
 )
@@ -76,6 +80,17 @@ def get_sensor_data(url): #获取普通数值型传感器历史数据
     #return str(js['value'])
     return str(js['value']) + u"   (数据更新时间)" + str(js['timestamp'])
 
+def data_get_all():
+    temp = get_sensor_data(URL_WEATHER_SENSOR)
+    hum = get_sensor_data(URL_HUM_SENSOR)
+    bar = get_sensor_data(URL_BAR_SENSOR)
+    light = get_sensor_data(URL_LIGHT_SENSOR)
+    co = get_sensor_data(URL_CO_SENSOR)
+    rain = get_sensor_data(URL_RAIN_SENSOR)
+    formal = get_sensor_data(URL_FORMAL_SENSOR)
+    air = get_sensor_data(URL_AIR_SENSOR)
+    return temp,hum,bar,light,co,rain,formal,air
+
 class WeixinInterface:
  
     def __init__(self):
@@ -100,6 +115,7 @@ class WeixinInterface:
             logging.warning(u"媒体ID"+MediaID)
             return self.render.reply_text(fromUser,toUser,int(time.time()),u"返回媒体ID:"+MediaID) 
         elif(msgType=='text'):
+            temp,hum,bar,light,co,rain,formal,air = get_sensor_data();
             content=xml.find("Content").text   #判断为文字才做文字处理
             if u'树莓派温度' in content:
                 return self.render.reply_text(fromUser,toUser,int(time.time()),u"当前树莓派的温度是:"+get_sensor_data(URL_RPI_SERSOR)) 
@@ -113,6 +129,10 @@ class WeixinInterface:
                 return self.render.reply_text(fromUser,toUser,int(time.time()),u"当前 平台 气象站 的一氧化碳含量是:"+get_sensor_data(URL_CO_SENSOR) + u'单位 PPM')
             elif u'平台' in content:
                 return self.render.reply_text(fromUser,toUser,int(time.time()),u"当前 选中的平台是 气象站")
+            elif u'数据' in content:
+                str = u"当前的气象站数据是:\n" \
+                        +u"温度:"+temp+"'C"
+                return self.render.reply_text(fromUser,toUser,int(time.time()),str)
             elif u'green' in content:
                 return self.render.reply_text(fromUser,toUser,int(time.time()),u"当然是选择原谅她啦！") 
             return self.render.reply_text(fromUser,toUser,int(time.time()),u"你刚才发送到公众号的信息是:"+content) 
