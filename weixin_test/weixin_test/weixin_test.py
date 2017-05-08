@@ -13,6 +13,8 @@ API_YEELINK = '74c4601f0870e71ed6db8ec6f4741b33'
 URL_RPI_SERSOR = 'http://api.yeelink.net/v1.0/device/350381/sensor/393171/datapoints'
 URL_WEATHER_SENSOR = 'http://api.yeelink.net/v1.0/device/357151/sensor/405136/datapoints'
 URL_BAR_SENSOR = 'http://api.yeelink.net/v1.0/device/357151/sensor/405139/datapoints'
+URL_LIGHT_SENSOR = 'http://api.yeelink.net/v1.0/device/357151/sensor/406121/datapoints'
+URL_CO_SENSOR = 'http://api.yeelink.net/v1.0/device/357151/sensor/405958/datapoints'
 urls = (
 '/weixin','WeixinInterface'
 )
@@ -105,8 +107,13 @@ class WeixinInterface:
                 return self.render.reply_text(fromUser,toUser,int(time.time()),u"当前 平台 气象站 的温度是:"+get_sensor_data(URL_WEATHER_SENSOR)+'C') 
             elif u'气压' in content:
                 return self.render.reply_text(fromUser,toUser,int(time.time()),u"当前 平台 气象站 的气压是:"+get_sensor_data(URL_BAR_SENSOR)+'pa') 
+            elif u'光照' in content:
+                return self.render.reply_text(fromUser,toUser,int(time.time()),u"当前 平台 气象站 的光照是:"+get_sensor_data(URL_LIGHT_SENSOR) + 'LUX')
             elif u'平台' in content:
-                return self.render.reply_text(fromUser,toUser,int(time.time()),u"当前 选中的平台是 气象站") 
+                return self.render.reply_text(fromUser,toUser,int(time.time()),u"当前 平台 气象站 的一氧化碳含量是:"+get_sensor_data(URL_CO_SENSOR) + 'PPM')
+            elif u'平台' in content:
+                return self.render.reply_text(fromUser,toUser,int(time.time()),u"当前 选中的平台是 气象站")
+           
             elif u'green' in content:
                 return self.render.reply_text(fromUser,toUser,int(time.time()),u"当然是选择原谅她啦！") 
             return self.render.reply_text(fromUser,toUser,int(time.time()),u"你刚才发送到公众号的信息是:"+content) 
