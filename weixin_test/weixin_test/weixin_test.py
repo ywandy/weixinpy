@@ -103,13 +103,13 @@ class WeixinInterface:
             content=xml.find("Content").text   #判断为文字才做文字处理
             if u'树莓派温度' in content:
                 return self.render.reply_text(fromUser,toUser,int(time.time()),u"当前树莓派的温度是:"+get_sensor_data(URL_RPI_SERSOR)) 
-            if u'温度' in content:
+            elif u'温度' in content:
                 return self.render.reply_text(fromUser,toUser,int(time.time()),u"当前 平台 气象站 的温度是:"+get_sensor_data(URL_WEATHER_SENSOR)+'C') 
             elif u'气压' in content:
                 return self.render.reply_text(fromUser,toUser,int(time.time()),u"当前 平台 气象站 的气压是:"+get_sensor_data(URL_BAR_SENSOR)+'pa') 
             elif u'光照' in content:
                 return self.render.reply_text(fromUser,toUser,int(time.time()),u"当前 平台 气象站 的光照是:"+get_sensor_data(URL_LIGHT_SENSOR) + 'LUX')
-            elif u'平台' in content:
+            elif u'一氧化碳' in content:
                 return self.render.reply_text(fromUser,toUser,int(time.time()),u"当前 平台 气象站 的一氧化碳含量是:"+get_sensor_data(URL_CO_SENSOR) + 'PPM')
             elif u'平台' in content:
                 return self.render.reply_text(fromUser,toUser,int(time.time()),u"当前 选中的平台是 气象站")
